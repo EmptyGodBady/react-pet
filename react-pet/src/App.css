@@ -1,25 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 .todo-wrapper{
   width: 600px;
   border-radius: 16px;
   list-style-type: none;
   border: 1px solid white;
-  padding-left: 15px;
   margin-top: 15px;
   margin-bottom: 10px;
   padding: 15px;
-  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .todo-task{
-  cursor: pointer;
   width: 600px;
   border-radius: 16px;
   list-style-type: none;
   border: 1px solid white;
-  padding-left: 15px;
   margin-top: 15px;
   margin-bottom: 10px;
   padding: 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 *{
   margin: 0;
@@ -36,12 +38,20 @@
 }
 .input-task{
   border-radius: 16px;
-  width: 70%;
+  width: 60%;
 }
 .listTitle{
   text-align: center;
   padding: 25px;
 }
-
-
-
+.save-task{
+  color: white;
+  cursor: pointer;
+}
+.task-check{
+  cursor: pointer;
+}
+.tag-style{
+  font-weight: 700;
+  
+}

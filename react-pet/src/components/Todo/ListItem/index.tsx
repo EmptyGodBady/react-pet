@@ -6,9 +6,13 @@ type Props = {
 export default function ListItem({ tag, task }: Props) {
   return (
     <li className="todo-task">
-      <p>{tag}</p>
+      <div>
+        <p className="tag-style">{tag}</p>
 
-      <p>{task}</p>
+        <p className="task-style">{task}</p>
+      </div>
+
+      <input type="checkbox" className="task-check"></input>
     </li>
   );
 }

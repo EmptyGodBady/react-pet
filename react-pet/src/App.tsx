@@ -6,6 +6,25 @@ export default function App() {
   const [todoList, setTodoList] = useState<any>([]);
   const [itemForm, setItemForm] = useState({ tag: "", task: "" });
 
+  function setListItem() {
+    setTodoList((prev: any) => [...prev, itemForm]);
+    setItemForm(() => {
+      return {
+        tag: "",
+        task: "",
+      };
+    });
+  }
+  function onTodoSave(event: any) {
+    if (event.key === "Enter") {
+      console.log(event);
+      setListItem();
+      return;
+    }
+    if (!event.key) {
+      setListItem();
+    }
+  }
   function onInputChange(e: any) {
     const { name, value } = e.currentTarget;
 
@@ -20,18 +39,7 @@ export default function App() {
       {todoList.map((todo: any) => (
         <ListItem tag={todo.tag} task={todo.task} />
       ))}
-      <li
-        className="todo-wrapper"
-        onClick={(e) => {
-          setTodoList((prev: any) => [...prev, itemForm]);
-          setItemForm(() => {
-            return {
-              tag: "",
-              task: "",
-            };
-          });
-        }}
-      >
+      <li className="todo-wrapper" onClick={() => {}}>
         <input
           className="input-tag"
           name="tag"
@@ -39,6 +47,7 @@ export default function App() {
           type="text"
           onClick={(e) => e.stopPropagation()}
           onInput={onInputChange}
+          onKeyDown={onTodoSave}
         />
         <input
           className="input-task"
@@ -47,7 +56,11 @@ export default function App() {
           type="text"
           onClick={(e) => e.stopPropagation()}
           onInput={onInputChange}
+          onKeyDown={onTodoSave}
         />
+        <button className="save-task" onClick={onTodoSave}>
+          Save
+        </button>
       </li>
     </ul>
   );
