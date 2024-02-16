@@ -1,67 +1,56 @@
-import { ReactNode, createElement, useState } from "react";
+import { useState } from "react";
 import "./App.css";
-import ListItem from "./components/Todo/ListItem";
+import RecipeCard from "./components/Recipes/RecipeCard";
+import { recepies } from "./mocks";
 
 export default function App() {
-  const [todoList, setTodoList] = useState<any>([]);
-  const [itemForm, setItemForm] = useState({ tag: "", task: "" });
-
-  function setListItem() {
-    setTodoList((prev: any) => [...prev, itemForm]);
-    setItemForm(() => {
-      return {
-        tag: "",
-        task: "",
-      };
-    });
-  }
-  function onTodoSave(event: any) {
-    if (event.key === "Enter") {
-      console.log(event);
-      setListItem();
-      return;
+  const [choiceType, setChoiceType] = useState(true);
+  const [indexValue, setValue] = useState(1);
+  function setChosenChange() {
+    switch (indexValue) {
+      case 1:
+        setValue(0);
+        break;
+      case 0:
+        setValue(1);
+        break;
     }
-    if (!event.key) {
-      setListItem();
+    if (indexValue === 1) {
+      setChoiceType(false);
+    } else {
+      setChoiceType(true);
     }
-  }
-  function onInputChange(e: any) {
-    const { name, value } = e.currentTarget;
-
-    setItemForm((prevItem) => ({
-      ...prevItem,
-      [name]: value,
-    }));
   }
   return (
-    <ul className="todo-list">
-      <h1 className="listTitle">Task Manager</h1>
-      {todoList.map((todo: any) => (
-        <ListItem tag={todo.tag} task={todo.task} />
-      ))}
-      <li className="todo-wrapper" onClick={() => {}}>
+    <div className="content">
+      <h1>Recepies</h1>
+      <label className="switch">
         <input
-          className="input-tag"
-          name="tag"
-          value={itemForm.tag}
-          type="text"
-          onClick={(e) => e.stopPropagation()}
-          onInput={onInputChange}
-          onKeyDown={onTodoSave}
+          className="checkChoise"
+          type="checkbox"
+          onClick={setChosenChange}
+          defaultChecked
         />
-        <input
-          className="input-task"
-          name="task"
-          value={itemForm.task}
-          type="text"
-          onClick={(e) => e.stopPropagation()}
-          onInput={onInputChange}
-          onKeyDown={onTodoSave}
-        />
-        <button className="save-task" onClick={onTodoSave}>
-          Save
-        </button>
-      </li>
-    </ul>
+        <span className="slider round"></span>
+      </label>
+      <ul className="recepies">
+        {choiceType && (
+          <li className="recepies-list">
+            Main Ingredients: {`${recepies[0].mainIngridients}`}
+          </li>
+        )}
+        {choiceType && (
+          <li className="recepies-list">
+            Optional Ingredients: {`${recepies[0].optionalIngridients}`}
+          </li>
+        )}
+        {!choiceType && (
+          <RecipeCard title="Meals" categories={recepies[1].meals} />
+        )}
+        {!choiceType && (
+          <RecipeCard title="Bakery" categories={recepies[2].bakery} />
+        )}
+      </ul>
+    </div>
   );
 }

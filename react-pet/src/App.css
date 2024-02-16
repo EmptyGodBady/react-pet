@@ -1,57 +1,95 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-.todo-wrapper{
-  width: 600px;
-  border-radius: 16px;
-  list-style-type: none;
-  border: 1px solid white;
-  margin-top: 15px;
-  margin-bottom: 10px;
-  padding: 15px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.todo-task{
-  width: 600px;
-  border-radius: 16px;
-  list-style-type: none;
-  border: 1px solid white;
-  margin-top: 15px;
-  margin-bottom: 10px;
-  padding: 15px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
+
 *{
   margin: 0;
   font-family: 'Montserrat', sans-serif;
+  list-style-type: none;
 }
-.todo-list{
-  min-height: 1000px;
-  width: 700px;
+h1{
+  text-align: center;
+}
+.recepies{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 0;
+}
+.recepies-list{
+  width: 100%;
+  margin: 15px;
+  padding: 10px;
+  border-radius: 16px;
   border: 1px solid white;
 }
-.input-tag{
-  border-radius: 16px;
-  width: 20%;
+.switch {
+  margin-top: 25px;  
+  margin-left: auto;  
+  margin-right: auto;  
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
 }
-.input-task{
-  border-radius: 16px;
-  width: 60%;
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
-.listTitle{
-  text-align: center;
-  padding: 25px;
-}
-.save-task{
-  color: white;
+
+.slider {
+  position: absolute;
   cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
 }
-.task-check{
-  cursor: pointer;
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
 }
-.tag-style{
-  font-weight: 700;
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+.content{
+  display: flex;
+  flex-direction: column;
   
+}
+body{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  padding-top: 10%;
 }

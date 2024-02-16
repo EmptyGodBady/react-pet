@@ -1,18 +1,18 @@
 type Props = {
-  tag: string;
-  task: string;
+  name: string;
+  ingridients: string;
 };
 
-export default function ListItem({ tag, task }: Props) {
+export default function RecipeListItem({ name, ingridients }: Props) {
   return (
-    <li className="todo-task">
+    <li className="todo-ingridients">
       <div>
-        <p className="tag-style">{tag}</p>
+        <p className="name-style">{name}</p>
 
-        <p className="task-style">{task}</p>
+        <p className="ingridients-style">{ingridients}</p>
       </div>
 
-      <input type="checkbox" className="task-check"></input>
+      <input type="checkbox" className="ingridients-check"></input>
     </li>
   );
 }
