@@ -3,22 +3,23 @@ import "./App.css";
 import RecipeCard from "./components/Recipes/RecipeCard";
 import { recepies } from "./mocks";
 
+enum Choice {
+  recipes = "Recipes",
+  readyMeals = "Ready Meals",
+}
+
 export default function App() {
-  const [choiceType, setChoiceType] = useState(true);
-  const [indexValue, setValue] = useState(1);
-  function setChosenChange() {
-    switch (indexValue) {
-      case 1:
-        setValue(0);
+  const [choiceType, setChoiceType] = useState<Choice>(Choice.recipes);
+
+  function setChosenChange(type: Choice) {
+    switch (type) {
+      case Choice.readyMeals:
+        setChoiceType(Choice.readyMeals);
         break;
-      case 0:
-        setValue(1);
+
+      case Choice.recipes:
+        setChoiceType(Choice.recipes);
         break;
-    }
-    if (indexValue === 1) {
-      setChoiceType(false);
-    } else {
-      setChoiceType(true);
     }
   }
   return (
@@ -28,26 +29,30 @@ export default function App() {
         <input
           className="checkChoise"
           type="checkbox"
-          onClick={setChosenChange}
+          onClick={(event) => {
+            event.currentTarget.checked
+              ? setChosenChange(Choice.recipes)
+              : setChosenChange(Choice.readyMeals);
+          }}
           defaultChecked
         />
         <span className="slider round"></span>
       </label>
       <ul className="recepies">
-        {choiceType && (
-          <li className="recepies-list">
-            Main Ingredients: {`${recepies[0].mainIngridients}`}
-          </li>
+        {choiceType === Choice.recipes && (
+          <>
+            <li className="recepies-list">
+              Main Ingredients: {`${recepies[0].mainIngridients}`}
+            </li>
+            <li className="recepies-list">
+              Optional Ingredients: {`${recepies[0].optionalIngridients}`}
+            </li>
+          </>
         )}
-        {choiceType && (
-          <li className="recepies-list">
-            Optional Ingredients: {`${recepies[0].optionalIngridients}`}
-          </li>
-        )}
-        {!choiceType && (
+        {choiceType !== Choice.recipes && (
           <RecipeCard title="Meals" categories={recepies[1].meals} />
         )}
-        {!choiceType && (
+        {choiceType !== Choice.recipes && (
           <RecipeCard title="Bakery" categories={recepies[2].bakery} />
         )}
       </ul>
